@@ -3,13 +3,17 @@ import Editor from "./components/Editor"
 import { data } from "./data"
 import Split from "react-split"
 import {nanoid} from "nanoid"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function App() {
-    const [notes, setNotes] = useState([])
+    const [notes, setNotes] = useState(JSON.parse(localStorage.getItem("notes")) || [])
     const [currentNoteId, setCurrentNoteId] = useState(
         (notes[0] && notes[0].id) || ""
     )
+
+    useEffect(() => {
+        localStorage.setItem("notes", JSON.stringify(notes))
+    })
     
     function createNewNote() {
         const newNote = {
