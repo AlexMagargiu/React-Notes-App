@@ -8,6 +8,7 @@ import { notesCollection, db} from "./firebase"
 export default function App() {
     const [notes, setNotes] = useState([])
     const [currentNoteId, setCurrentNoteId] = useState("")
+    const [tempNoteText, setTempNoteText] = useState("")
 
     const currentNote = notes.find(note => note.id === currentNoteId) || notes[0]
 
@@ -29,6 +30,21 @@ export default function App() {
             setCurrentNoteId(notes[0]?.id)
         }
     }, [notes])
+
+    useEffect(() => {
+        if(currentNote) {
+            setTempNoteText(currentNote.body)
+        }
+    }, [currentNote])
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (tempNoteText !== currentNote.body){
+                updateNote(tempNoteText)
+            }
+        }, 1000)
+        return () => clearTimeout(timeoutId)
+    }, [tempNoteText])
     
     async function createNewNote() {
         const newNote = {
@@ -69,8 +85,8 @@ export default function App() {
                     deleteNote={deleteNote}
                 />
                 <Editor 
-                    currentNote={currentNote} 
-                    updateNote={updateNote} 
+                    tempNoteText={tempNoteText} 
+                    setTempNoteText={setTempNoteText} 
                 />
             </Split>
             :
