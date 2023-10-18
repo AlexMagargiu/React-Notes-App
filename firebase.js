@@ -1,16 +1,15 @@
 import { initializeApp } from "firebase/app";
-import {collection, getFirestore} from "firebase/firestore"
-
+import { getFirestore, collection } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAjzPqvnjw1bDC94eEM0muhUu4HCel5dhI",
-  authDomain: "react-notes-92d92.firebaseapp.com",
-  projectId: "react-notes-92d92",
-  storageBucket: "react-notes-92d92.appspot.com",
-  messagingSenderId: "763441554694",
-  appId: "1:763441554694:web:cb84118d2b56ac69d6aa87"
+  apiKey: "AIzaSyChbsHy1OonOI5AbPyqVKDWcbf2rXGf2AQ",
+  authDomain: "react-notes-73d52.firebaseapp.com",
+  projectId: "react-notes-73d52",
+  storageBucket: "react-notes-73d52.appspot.com",
+  messagingSenderId: "955227693149",
+  appId: "1:955227693149:web:d91d14ff3873147d9eadb4",
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app)
-export const notesCollection = collection(db, "notes")
+export const db = getFirestore(app);
+export const notesCollection = collection(db, "notes");
